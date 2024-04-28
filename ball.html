@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ball Jump</title>
+        <style>
+            body {
+                background-color: #e2e8f0;
+                margin: 0;
+            }
+
+            main {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+                min-height: 100vh;
+
+                & .container {
+                    height: 200px;
+                    position: relative;
+
+                    & .ball {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        background-color: #065f46;
+                        position: absolute;
+                        bottom: 0;
+                        translate: -50% 0;
+                        animation: bounce 0.7s infinite alternate ease-out;
+
+                        &.stop {
+                            animation-play-state: paused;
+                        }
+                    }
+                }
+
+                button {
+                    padding: .5rem 1rem;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    background-color: #4338ca;
+                    color: #eef2ff;
+                    border: 1px solid #312e81;
+                    border-radius: .25rem;
+                    cursor: pointer;
+                    transition: background-color 300ms;
+
+                    &:hover {
+                        background-color: #312e81;
+                    }
+                }
+            }
+
+            @keyframes bounce {
+                from {
+                    transform: translateY(0) scale(1.05, 0.95);
+                }
+                to {
+                    transform: translateY(-100px) scale(1, 1);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <div class="ball" id="ball"></div>
+            </div>
+            <button id="togglePlayBtn">Stop</button>
+        </main>
+
+        <script>
+            document
+                .getElementById("togglePlayBtn")
+                .addEventListener("click", (e) => {
+                    const ball = document.getElementById("ball");
+                    ball.classList.toggle("stop");
+
+                    // Update the text on the button
+                    if (ball.classList.contains("stop"))
+                        e.target.textContent = "Start";
+                    else e.target.textContent = "Stop";
+                });
+        </script>
+    </body>
+</html>
